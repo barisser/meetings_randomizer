@@ -46,5 +46,7 @@ and iteratively measure total violations.
 import randomizer as r
 
 people_data = r.people_inputs()
+
 history = r.meetings_trajectory(3)    #for three cycles (meeting_size=4 is default but can be altered)
+
 measure_violations(history, people_data)
