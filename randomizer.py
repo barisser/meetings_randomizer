@@ -109,15 +109,6 @@ def meetings_trajectory(cycles, meeting_size=4):
         meeting_history.append(meetings)
     return meeting_history
 
-peopledata = people_inputs()
-meetings = []
-already_assigned = []
-#availabilities, availabilities_count, adict = compute_availabilities(peopledata, meetings)
-
-#meeting, already_assigned, adict = create_meeting(adict, availabilities, already_assigned)
-#meeting2, already_assigned, adict = create_meeting(adict, availabilities, already_assigned)
-history = meetings_trajectory(3)
-
 def measure_violations(history, people_data):
     violations = 0
     previous_partners = {}
