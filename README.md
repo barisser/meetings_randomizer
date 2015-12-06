@@ -29,6 +29,17 @@ This is not an optimal solution but an algorithm that produces a good first-pass
 outcome.  One could easily introduce swaps from the outcome of this algorithm
 and iteratively measure total violations.
 
+-- Description of the algorithm
+  For each person calculate the number of people who are available to them given
+  the current meetings history.  This is equivalent to the number of people for
+  whom the person is available.  The 'scarcest' people, ie those available to
+  the fewest people, are assigned first to meetings.  Of the people available to
+  them, the scarcest of those are then added to the meeting.  After several are
+  assigned, only those who are available to all current assignees (in a given
+    meeting) are eligible for assignment.
+
+  This way the most difficult people to place are placed first.  This is path dependent and doesn't
+  look very far ahead.  It's a close enough solution.
 
 -- To Run
 

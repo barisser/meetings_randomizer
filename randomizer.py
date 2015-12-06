@@ -64,7 +64,6 @@ def who_should_join(availabilities_dict, availabilities, meeting, already_assign
     e = who_is_eligible_to_join(availabilities, meeting, already_assigned)
     e = [[x, availabilities_dict[x]] for x in e if x not in already_assigned]
     e = sorted(e, key=operator.itemgetter(1))
-    #print e
     e = e[0][0]
     return e
 
@@ -83,7 +82,6 @@ def create_meeting(availabilities_dict, availabilities, already_assigned, meetin
         meeting, newperson = increment_meeting(availabilities_dict, availabilities, meeting, already_assigned)
         already_assigned.append(newperson)
         del availabilities_dict[newperson]
-            #del availabilities[newperson]
 
     return meeting, already_assigned, availabilities_dict
 
