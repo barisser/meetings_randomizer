@@ -2,6 +2,7 @@ import operator
 meetings_history = []
 #meeting is just an array of employee strings length 4
 
+
 def people_inputs():
     f = open('people.txt')
     data = f.readlines()
@@ -21,6 +22,7 @@ def people_inputs():
 
     return peopledata
 
+
 def compute_availability_once(name, peopledata, meetings_history):
     availability = []
     my_group = peopledata[name]
@@ -35,6 +37,7 @@ def compute_availability_once(name, peopledata, meetings_history):
                         availability.remove(person)
     return availability
 
+
 def compute_availabilities(peopledata, meetings_history):
     availabilities = {}
     availabilities_count = {}
@@ -48,11 +51,13 @@ def compute_availabilities(peopledata, meetings_history):
         availabilities_dict[x[0]] = x[1]
     return availabilities, availabilities_count, availabilities_dict
 
+
 def create_meeting(availabilities, availabilities_count, availabilities_dict, meeting_size=4):
     meeting = [availabilities_count[0][0]]
     while len(meeting) < meeting_size:
         meeting = add_to_meeting(availabilities, availabilities_count, availabilities_dict, meeting)
     return meeting
+
 
 def who_is_eligible_to_join(availabilities, meeting, already_assigned):
     e = availabilities.keys()
@@ -60,12 +65,14 @@ def who_is_eligible_to_join(availabilities, meeting, already_assigned):
         e = [x for x in e if x in availabilities[person] and not x in already_assigned]
     return e
 
+
 def who_should_join(availabilities_dict, availabilities, meeting, already_assigned):
     e = who_is_eligible_to_join(availabilities, meeting, already_assigned)
     e = [[x, availabilities_dict[x]] for x in e if x not in already_assigned]
     e = sorted(e, key=operator.itemgetter(1))
     e = e[0][0]
     return e
+
 
 def increment_meeting(availabilities_dict, availabilities, meeting, already_assigned):
     try:
@@ -76,6 +83,7 @@ def increment_meeting(availabilities_dict, availabilities, meeting, already_assi
     meeting.append(newperson)
     return meeting, newperson
 
+
 def create_meeting(availabilities_dict, availabilities, already_assigned, meeting_size=4):
     meeting = []
     while len(meeting) < meeting_size and len(availabilities_dict) > 0:
@@ -84,6 +92,7 @@ def create_meeting(availabilities_dict, availabilities, already_assigned, meetin
         del availabilities_dict[newperson]
 
     return meeting, already_assigned, availabilities_dict
+
 
 def create_meeting_cycle(availabilities_dict, availabilities, meeting_size=4):
     meetings = []
@@ -94,10 +103,12 @@ def create_meeting_cycle(availabilities_dict, availabilities, meeting_size=4):
         meetings.append(meeting)
     return meetings
 
+
 def meeting_cycle(meetings_history, people_data, meeting_size=4):
     availabilities, availabilities_count, adict = compute_availabilities(people_data, meetings_history)
     meetings = create_meeting_cycle(adict, availabilities)
     return meetings
+
 
 def meetings_trajectory(cycles, meeting_size=4):
     people_data = people_inputs()
@@ -106,6 +117,7 @@ def meetings_trajectory(cycles, meeting_size=4):
         meetings = meeting_cycle(meeting_history, people_data, meeting_size=meeting_size)
         meeting_history.append(meetings)
     return meeting_history
+
 
 def measure_violations(history, people_data):
     violations = 0
